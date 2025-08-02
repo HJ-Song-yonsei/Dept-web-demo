@@ -1,0 +1,67 @@
+{# board_detail.html #}
+{% extends 'base.html' %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+  <!-- 상단 테이블 스타일로 메타 정보 -->
+  <table class="table">
+    <tr>
+      <th style="width:120px">제목</th>
+      <td>{{ item.title }}</td>
+    </tr>
+    <tr>
+      <th>작성일</th>
+      <td>{{ item.date }}</td>
+    </tr>
+    <tr>
+      <th>작성자</th>
+      <td>{{ item.author }}</td>
+    </tr>
+  </table>
+
+  <!-- 본문 -->
+  <div class="mb-4 markdown-body">
+    {{ item.content | safe }}
+  </div>
+
+  <!-- 첨부파일 -->
+  {% if item.files %}
+    <table class="table">
+      <tr>
+        <th style="width:120px">첨부</th>
+        <td>
+          {% for f in item.files %}
+            <a href="{{ f }}" target="_blank">{{ f.split('/')[-1] }}</a>
+            {% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+
+  <!-- 이전/목록/다음 버튼 -->
+  <nav class="d-flex justify-content-between mt-4">
+    <div>
+      {% if prev_item %}
+        <a href="{{ url_for('myboard.board_view', item_id=prev_item.id) }}" class="btn btn-outline-primary">
+          ← 이전글
+        </a>
+      {% endif %}
+    </div>
+    <div>
+      <a href="javascript:history.back()" class="btn btn-primary">← 목록</a>
+    </div>
+    <div>
+      {% if next_item %}
+        <a href="{{ url_for('myboard.board_view', item_id=next_item.id) }}" class="btn btn-outline-primary">
+          다음글 →
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+
+</div>
+{% endblock %}

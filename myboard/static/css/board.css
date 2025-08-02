@@ -1,0 +1,111 @@
+/* static/css/board.css */
+
+/* 전체 컨테이너 가로 스크롤 */
+#board-table-container {
+  overflow-x: auto;
+}
+
+/* 테이블 기본 세팅 */
+#board-table-container .table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 0; /* 목록 아래 여백 제거 */
+}
+
+/* 헤더 위 파란 굵은 실선 */
+#board-table-container .table thead tr {
+  border-bottom: 3px solid #003E7E;
+}
+#board-table-container .table thead th {
+  background-color: #fff;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+/* 공지(Notice) 행 : 연한 회색 음영 */
+#board-table-container .table tbody tr.table-secondary,
+#board-table-container .notice-row {
+  background-color: #f8f9fa;
+}
+
+/* 선택된(hover 또는 JS로 지정된) 행 : 연한 파란 음영 */
+#board-table-container .table tbody tr.selected-row {
+  background-color: #e6f2ff;
+}
+
+/* 마우스 오버 시 약한 강조 */
+#board-table-container .table tbody tr:hover {
+  background-color: rgba(0, 62, 126, 0.05);
+}
+
+/* 행과 셀 중앙 정렬 */
+#board-table-container .table th,
+#board-table-container .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 첨부 파일 아이콘 중앙 배치 */
+#board-table-container .table td .attachment-icon {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* 제목 링크 스타일 */
+#board-table-container .board-link {
+  color: inherit;
+  text-decoration: none;
+}
+#board-table-container .board-link:hover {
+  text-decoration: underline;
+}
+
+/* 반응형: 모바일에서 테이블 스크롤 */
+@media (max-width: 767px) {
+  #board-table-container .table {
+    font-size: 0.9rem;
+  }
+}
+/* ─── 목록·상세 공통 파란 실선 ─── */
+#board-table-container table thead th:first-child,
+#board-detail table thead th:first-child {
+  position: relative;
+  padding-top: 0.75rem;
+}
+
+#board-table-container table thead th:first-child::before,
+#board-detail table thead th:first-child::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background-color: #003E7E;
+}
+
+/* 상세 내용 박스 padding / border 조정 */
+#board-detail .detail-body {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-top: none; /* 위쪽은 가짜 thead가 대신 */
+  border-radius: 0 0 .25rem .25rem;
+  background: #fff;
+}
+/* 공지 행 음영 (목록·상세 동일) */
+.table-hover .table-secondary {
+  background-color: #f8f9fa;
+}
+
+/* 테이블 헤더 상단 파란 실선 (목록·상세 동일) */
+.table table thead th:first-child,
+.table-hover table thead th:first-child {
+  position: relative;
+  padding-top: 0.75rem;
+}
+.table table thead th:first-child::before,
+.table-hover table thead th:first-child::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background-color: #003E7E;
+}
