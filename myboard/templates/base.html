@@ -39,10 +39,17 @@
             <a class="nav-link" href="{{ url_for('index') }}">홈</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('myboard.board_api') }}">게시판</a>
+            {# freeze일 땐 .json 엔드포인트로 연결 #}
+            {% if IS_FREEZING %}
+              <a class="nav-link" href="{{ url_for('myboard.board_api_json') }}">게시판</a>
+            {% else %}
+              <a class="nav-link" href="{{ url_for('myboard.board_api') }}">게시판</a>
+            {% endif %}
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('myboard.edit') }}">글쓰기</a>
+            {% if not IS_FREEZING %}
+              <a class="nav-link" href="{{ url_for('myboard.edit') }}">글쓰기</a>
+            {% endif %}
           </li>
         </ul>
       </div>
@@ -64,8 +71,7 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <!-- 게시판 스크립트 -->
-  <script src="{{ url_for('myboard.static', filename='js/board.js') }}"></script>
-
+  <script src="{{ url_for('static', filename='js/board.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>
